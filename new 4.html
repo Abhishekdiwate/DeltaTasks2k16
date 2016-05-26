@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<style type="text/css">
+    body { background-color: #C0C0C0;}
+		.countdowncontent {
+		position: absolute;
+		background-color: #ddd;
+		padding: 20px,20px;
+	  box-shadow: 10px 10px 5px #888888;
+	  text-align: center;
+	  top: 50%;
+	  left: 30%;
+	  transform: translateX(50%),translateY(50%);
+	  border-radius: 25px;
+	  
+	  }
+	  .size {
+	  font-size: 40px;
+	  font-family: algerian;}
+	  th { text-align: center;}
+	  th,td { padding: 15px;}
+	  td { 
+	  background-color: black;
+	  color: white;}
+	  #finish {color:#FFCCCC;
+	  font-family: algerian;
+	  font-size: 40px;
+	  position: absolute;
+	  top: 200px;
+	  left: 300px;
+	  }
+	  .text {font-size: 20px;
+	  font-family: algerian; 
+	  border: 5px solid black;
+	  text-align: center;
+	  background-color: blue;
+	  }
+	  .buttons{ position: absolute;
+	   top: 82%;
+	  left: 30%;
+	  padding: 50px;
+	  display: inline block;
+	  text-color: white;
+	  }
+	  #button1 {width: 100px;
+	  height: 50px;
+	  background-color: red;}
+	  #button2 {width: 100px;
+	  height: 50px;
+	  background-color: red;}
+	  #button3 {width: 100px;
+	  height: 50px;
+	  background-color: red;}
+	  .buttons a{
+	  text-decoration: none;
+	  font-size: 20px;
+	  font-family: arial black;
+	  color: black;}
+	  #button1:hover {
+	  background-color: green;
+	  color: white;}
+	  #button2:hover {
+	  background-color: blue;
+	  color: white;}
+	  #button3:hover {
+	  background-color: yellow;
+	  color: white;}
+	  #display{color: #9900CC;
+	  font-family: algerian;
+	  font-size: 40px;
+	  position: absolute;
+	  top: 250px;
+	  left: 300px;
+	  }
+	
+	
+	  
+	  </style>
+		</head> 
+<body onload="startTime()">
+<div id="finish"></div>
+<table class="countdowncontent">
+<th class="size">countdown timer</th>
+<tr class="size">
+
+
+<div class="size">
+    <td id="days"></td>
+<td id="hours"></td>
+<td id="minutes"></td>
+<td id="seconds"></td>
+</div>
+</tr><tr class="size"><div class="size">
+        <td  col span="4">days
+        </td>
+        <td  col span="4">hours
+        </td>
+        <td  col span="4">minutes
+        </td>
+        <td  col span="4">seconds
+        </td>
+		</div></tr>
+</table >
+<header class="text">
+<h1>New year online offers </h1>
+</header>
+<div class="buttons">
+<button id="button1" onclick="start()">
+<a href="#">start</a></button> 
+<button id="button2" onclick="stop()"><a href="#">stop</a></button>
+<button id="button3" onclick="reset()"><a href="#">reset</a></button> 
+</div>
+<a href="offers.html">offers</a>
+</div>
+<div id="display"></div>
+<input type="date" id="date">
+<input type="time" id="time">
+<script type="text/javascript">
+
+
+ var p;
+function start() {
+	var dd = document.getElementById("date").value;
+    var tt = document.getElementById("time").value;
+    dd = dd + ' ' + tt;
+	dd = new Date(dd);
+	function startTime(){
+    var today = new Date();
+    var t=today.getTime();
+	var x=dd.getTime();
+	var rem=x-t;
+	
+	if (rem<=0)
+	{
+	document.getElementById("finish").innerHTML="countdown finished!";
+	document.getElementById("display").innerHTML="happy new year";
+	$(document).ready(function(){
+        $(".countdowncontent").fadeOut()
+    });
+	$(document).ready(function(){
+        $(".buttons").fadeOut()
+    });
+	
+	clearInterval(startTime());
+	}
+	
+	     var seconds=Math.floor((rem/1000)%60);
+         var minutes=Math.floor(rem/((1000*60))%60);
+         var hours=Math.floor((rem/(1000*60*60))%24);
+         var days=Math.floor((rem/(1000*60*60*24))%31);
+		minutes=checkTime(minutes);
+		seconds=checkTime(seconds);
+		hours=checkTime(hours); 
+		document.getElementById("minutes").innerHTML=minutes;
+   document.getElementById("days").innerHTML=days;
+     document.getElementById("hours").innerHTML=hours;
+	  document.getElementById("seconds").innerHTML=seconds;
+	 
+    
+}
+startTime();
+ p=setInterval(startTime,1000)
+}
+function stop(){
+clearInterval(p);}
+
+
+
+
+
+
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+	}
+	function reset()
+	{ document.getElementById("minutes").innerHTML=0;
+   document.getElementById("days").innerHTML=0;
+     document.getElementById("hours").innerHTML=0;
+	  document.getElementById("seconds").innerHTML=0;
+	}
+	
+	
+</script>
+
+</body>
+</html>
