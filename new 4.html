@@ -2,16 +2,19 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
 <style type="text/css">
-    body { background-color: #C0C0C0;}
+        body {
+		background-color: green;}
 		.countdowncontent {
+		color: white;
 		position: absolute;
 		background-color: #ddd;
 		padding: 20px,20px;
 	  box-shadow: 10px 10px 5px #888888;
 	  text-align: center;
 	  top: 50%;
-	  left: 30%;
+	  left: 20%;
 	  transform: translateX(50%),translateY(50%);
 	  border-radius: 25px;
 	  
@@ -30,12 +33,6 @@
 	  position: absolute;
 	  top: 200px;
 	  left: 300px;
-	  }
-	  .text {font-size: 20px;
-	  font-family: algerian; 
-	  border: 5px solid black;
-	  text-align: center;
-	  background-color: blue;
 	  }
 	  .buttons{ position: absolute;
 	   top: 82%;
@@ -67,19 +64,31 @@
 	  #button3:hover {
 	  background-color: yellow;
 	  color: white;}
-	  #display{color: #9900CC;
-	  font-family: algerian;
-	  font-size: 40px;
-	  position: absolute;
-	  top: 250px;
-	  left: 300px;
+	  #date{ position: absolute;
+	  top: -200%;
+	  left: 40%;
 	  }
-	
-	
+	  #time { position: absolute;
+	  top: -200%;
+	  left: 80%;}
+	  .title {font-size: 20px;
+	  font-family: algerian; 
+	  border: 5px solid black;
+	  text-align: center;
+	  background-color: blue;
+	  position: fixed;
+	  left: 250px;
+	  top: 0px;
+	  margin: 5px;
+	  color: black;
+	  }
 	  
 	  </style>
 		</head> 
-<body onload="startTime()">
+<body>
+<header class="title">
+<h1>user interface countdown timer </h1>
+</header>
 <div id="finish"></div>
 <table class="countdowncontent">
 <th class="size">countdown timer</th>
@@ -103,57 +112,52 @@
         </td>
 		</div></tr>
 </table >
-<header class="text">
-<h1>New year online offers </h1>
-</header>
 <div class="buttons">
 <button id="button1" onclick="start()">
 <a href="#">start</a></button> 
 <button id="button2" onclick="stop()"><a href="#">stop</a></button>
 <button id="button3" onclick="reset()"><a href="#">reset</a></button> 
-</div>
-<a href="offers.html">offers</a>
-</div>
-<div id="display"></div>
 <input type="date" id="date">
 <input type="time" id="time">
+
 <script type="text/javascript">
 
 
- var p;
+ var clear;
 function start() {
-	var dd = document.getElementById("date").value;
+	var dd = document.getElementById("date").value;/*getting deadline time and date from input data given*/
     var tt = document.getElementById("time").value;
     dd = dd + ' ' + tt;
 	dd = new Date(dd);
 	function startTime(){
-    var today = new Date();
-    var t=today.getTime();
-	var x=dd.getTime();
-	var rem=x-t;
+    var today = new Date();/*getting present date and time*/
+    var now=today.getTime();/*by using getTime function we can convert the time into milliseconds*/
+	var deadline=dd.getTime();
+	var rem=deadline-now;/*getting remaining time*/
 	
 	if (rem<=0)
 	{
-	document.getElementById("finish").innerHTML="countdown finished!";
-	document.getElementById("display").innerHTML="happy new year";
+	document.getElementById("finish").innerHTML="countdown finished!";/* displaying text as soon as remaining time reaches 0*/
+	
 	$(document).ready(function(){
-        $(".countdowncontent").fadeOut()
+        $(".countdowncontent").fadeOut()/*removing table as soon as countdown finished*/
     });
 	$(document).ready(function(){
-        $(".buttons").fadeOut()
+        $(".buttons").fadeOut()/*removing buttons as soon as countdown finished*/
     });
 	
 	clearInterval(startTime());
 	}
 	
-	     var seconds=Math.floor((rem/1000)%60);
+	     var seconds=Math.floor((rem/1000)%60);/*getting seconds,minutes,hours,days from input*/
+		 
          var minutes=Math.floor(rem/((1000*60))%60);
          var hours=Math.floor((rem/(1000*60*60))%24);
-         var days=Math.floor((rem/(1000*60*60*24))%31);
-		minutes=checkTime(minutes);
+         var days=Math.floor((rem/(1000*60*60*24)));
+		minutes=checkTime(minutes);/*checking whether minutes,secnds,hours has a value less than 0 or not*/
 		seconds=checkTime(seconds);
 		hours=checkTime(hours); 
-		document.getElementById("minutes").innerHTML=minutes;
+		document.getElementById("minutes").innerHTML=minutes;/*displaying them into minutes,seconds,hour,days*/
    document.getElementById("days").innerHTML=days;
      document.getElementById("hours").innerHTML=hours;
 	  document.getElementById("seconds").innerHTML=seconds;
@@ -161,10 +165,10 @@ function start() {
     
 }
 startTime();
- p=setInterval(startTime,1000)
+ clear=setInterval(startTime,1000)
 }
 function stop(){
-clearInterval(p);}
+clearInterval(clear);}
 
 
 
@@ -177,7 +181,7 @@ function checkTime(i) {
     }
     return i;
 	}
-	function reset()
+	function reset()/*introducing reset button to change them into initial value i.e,0*/
 	{ document.getElementById("minutes").innerHTML=0;
    document.getElementById("days").innerHTML=0;
      document.getElementById("hours").innerHTML=0;
