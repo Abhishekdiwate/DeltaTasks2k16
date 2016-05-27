@@ -4,9 +4,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
 <style type="text/css">
-        body {
+        html{
 		background-color: green;}
-		.countdowncontent {
+/*styling table*/	.countdowncontent {
 		color: white;
 		position: absolute;
 		background-color: #ddd;
@@ -22,8 +22,10 @@
 	  .size {
 	  font-size: 40px;
 	  font-family: algerian;}
-	  th { text-align: center;}
-	  th,td { padding: 15px;}
+	  th { text-align: center;
+	  color: black;}
+	  th,td { padding: 15px;
+	  }
 	  td { 
 	  background-color: black;
 	  color: white;}
@@ -32,6 +34,13 @@
 	  font-size: 40px;
 	  position: absolute;
 	  top: 200px;
+	  left: 300px;
+	  }
+	    #event {color:#FFCCCC;
+	  font-family: algerian;
+	  font-size: 40px;
+	  position: absolute;
+	  top: 300px;
 	  left: 300px;
 	  }
 	  .buttons{ position: absolute;
@@ -90,6 +99,7 @@
 <h1>user interface countdown timer </h1>
 </header>
 <div id="finish"></div>
+<div id="event"></div>
 <table class="countdowncontent">
 <th class="size">countdown timer</th>
 <tr class="size">
@@ -116,7 +126,7 @@
 <button id="button1" onclick="start()">
 <a href="#">start</a></button> 
 <button id="button2" onclick="stop()"><a href="#">stop</a></button>
-<button id="button3" onclick="reset()"><a href="#">reset</a></button> 
+<button id="button3" onclick="reset()"><a href="#">reset</a></button>
 <input type="date" id="date">
 <input type="time" id="time">
 
@@ -137,7 +147,8 @@ function start() {
 	
 	if (rem<=0)
 	{
-	document.getElementById("finish").innerHTML="countdown finished!";/* displaying text as soon as remaining time reaches 0*/
+	document.getElementById("finish").innerHTML="countdown finished!";
+	document.getElementById("event").innerHTML="event launched";/* displaying text as soon as remaining time reaches 0*/
 	
 	$(document).ready(function(){
         $(".countdowncontent").fadeOut()/*removing table as soon as countdown finished*/
@@ -145,7 +156,6 @@ function start() {
 	$(document).ready(function(){
         $(".buttons").fadeOut()/*removing buttons as soon as countdown finished*/
     });
-	
 	clearInterval(startTime());
 	}
 	
@@ -168,7 +178,7 @@ startTime();
  clear=setInterval(startTime,1000)
 }
 function stop(){
-clearInterval(clear);}
+clearInterval(clear);}/*by using stop function we can clear the time*/
 
 
 
